@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) throws InterruptedException{
@@ -28,6 +30,31 @@ public class Main {
         for (int i = 0; i < result.length; i++) {
             System.out.println(result[i]);
         }
+        System.out.println("");
+        int c[] = {4, 7 ,0, 9, -7, 2, -9};
+        System.out.println(calculateNumberOfPairs(c));
+    }
+
+    private static int calculateNumberOfPairs(int[] a) {
+        if (a.length<2) {
+            return 0;
+        }
+        Arrays.sort(a);
+        int negativeNumberIndex = 0;
+        int positiveNumberIndex = a.length - 1;
+        int result = 0;
+        while (a[negativeNumberIndex] < 0 && a[positiveNumberIndex] > 0 && negativeNumberIndex<=positiveNumberIndex) {
+            if (Math.abs(a[negativeNumberIndex])>a[positiveNumberIndex]) {
+                negativeNumberIndex++;
+            } else if (Math.abs(a[negativeNumberIndex])<a[positiveNumberIndex]) {
+                positiveNumberIndex--;
+            } else{
+                result++;
+                negativeNumberIndex++;
+                positiveNumberIndex--;
+            }
+        }
+        return result;
     }
 
     private static int[] mergeSortedArrays(int[] a, int[] b) {
